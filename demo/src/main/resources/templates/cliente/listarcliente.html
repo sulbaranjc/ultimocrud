@@ -13,11 +13,11 @@
             <h1>Listar cliente</h1>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <div class="container">
+            <div  class="container">
                 <div class="pb-2">
                     <a href="http://localhost:8080/cliente/alta"><button type="" class="btn btn-light col-1">Alta</button></a>
                 </div>
-                <table class="table table-striped">
+                <table th:if="${clientes != null and !clientes.empty}" class="table table-striped">
                     <thead>
                         <tr class="text-left">
                             <th colspan = "1" >Accion</th>
