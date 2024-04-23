@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -44,6 +45,18 @@ public class ControllerCliente {
         } catch (SQLException ex) {
             valorfinal="error";
         }
+        return valorfinal;
+    }
+    @GetMapping("/cliente/eliminar")
+    public String SubmitB (@RequestParam("codcliente") int id, Model model){
+        String valorfinal="redirect:/cliente";
+        try {
+            ge.eliminar(id);
+            model.addAttribute("clientes", ge.listar());
+        } catch (SQLException ex) {
+            valorfinal="error";
+        }
+        //return new ModelAndView(valorfinal, model.asMap());
         return valorfinal;
     }
 }
