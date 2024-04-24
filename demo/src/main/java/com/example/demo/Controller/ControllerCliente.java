@@ -59,4 +59,28 @@ public class ControllerCliente {
         //return new ModelAndView(valorfinal, model.asMap());
         return valorfinal;
     }
+    @GetMapping("/cliente/modificar")
+    public String modificar(@RequestParam ("codcliente") int id,Model model){
+        String valorfinal="./cliente/modificarcliente";
+        try {
+            model.addAttribute("cliente", ge.buscar(id));
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerCliente.class.getName()).log(Level.SEVERE, null, ex);
+            valorfinal="error";
+        }
+        return valorfinal;
+    }
+    @PostMapping("/cliente/modificar")
+    public String modificarBBDD (@ModelAttribute Cliente cliente, Model model){
+        String valorfinal="redirect:/cliente";
+        try {
+            ge.modificar(cliente);
+            model.addAttribute("clientes",ge.listar());
+        } catch (SQLException ex) {
+            Logger.getLogger(ControllerCliente.class.getName()).log(Level.SEVERE, null, ex);
+            valorfinal="error";
+        }
+        return valorfinal;
+    }
+
 }
